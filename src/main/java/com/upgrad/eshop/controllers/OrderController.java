@@ -29,7 +29,7 @@ public class OrderController {
 
     private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
-    @PostMapping
+    @PostMapping("/order")
     public Order createOrder(
             @RequestBody OrderRequest orderRequest, @RequestHeader(Constants.JwtToken.HEADER_KEY) String jwtToken)
             throws APIException, ProductNotFoundException, ShippingAddressNotFoundException {
