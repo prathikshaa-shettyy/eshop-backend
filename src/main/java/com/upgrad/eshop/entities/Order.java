@@ -37,7 +37,6 @@ public class Order {
     private Double amount;
     private LocalDateTime orderDate = LocalDateTime.now();
 
-//  TODO: Generate getters & setters and constructors for the Entity class
 
 
 }
