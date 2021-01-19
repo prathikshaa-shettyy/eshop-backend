@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -24,7 +26,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User acceptUserDetails(RegisterRequest registerRequest) throws UsernameAlreadyRegisteredException, EmailAlreadyRegisteredException {
-        return null;
+        Optional<User> acceptUser = userRepository.findByEmail(registerRequest.getEmail());
+        if( acceptUser != null){
+            throw new EmailAlreadyRegisteredException("Email already exists");
+        }
+        Optional<User> acceptUser1 = userRepository.findByUserName(registerRequest.getUserName());
+        if( acceptUser1 !=null){
+            throw new UsernameAlreadyRegisteredException("Username already exists");
+        }
+        User user = new User();
+        user.setEmail(registerRequest.getEmail());
+        user.setUserName(registerRequest.getUserName());
+        user.setFirstName(registerRequest.getFirstName());
+        user.setLastName(registerRequest.getLastName());
+        user.setPassword(registerRequest.getPassword());
+        user.setPhoneNumber(registerRequest.getPhoneNumber());
+        User savedUser=userRepository.save(user);
+        return savedUser;
+
     }
 
     @Override

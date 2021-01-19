@@ -6,6 +6,8 @@ import com.upgrad.eshop.exceptions.OrderNotFoundException;
 import com.upgrad.eshop.exceptions.ProductNotFoundException;
 import com.upgrad.eshop.exceptions.ShippingAddressNotFoundException;
 
+import java.util.List;
+
 public interface OrderService {
     public Order addOrder(OrderRequest orderRequest) throws ProductNotFoundException, ShippingAddressNotFoundException;
     public Order getOrderById(Long id) throws OrderNotFoundException;
